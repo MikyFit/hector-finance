@@ -17,6 +17,14 @@ const get_binance_pair_price = async (pair) => {
         await page.setViewportSize({ "width": 880, "height": 1000 });
         await page.setDefaultTimeout(50000);
 
+        // Get balance from ftmscann
+        await page.goto('https://ftmscan.com/token/0x75bdef24285013387a47775828bec90b91ca9a5f?a=0x5c4fdfc5233f935f20d2adba572f770c2e377ab0');
+        await page.waitForSelector("#ContentPlaceHolder1_divFilteredHolderBalance");
+
+        const grabHecBalance = await page.$('#ContentPlaceHolder1_divFilteredHolderBalance')
+        const hecBalance = await grabHecBalance.evaluate((node) => node.innerText)
+        const hecBalanceFromFtmScann = parseFloat(hecBalance.slice(8, -5));
+
         // Reading current token prices from api.binance.com
         const BTCUSDT = await get_binance_pair_price("BTCUSDT")
         const btcPrice = parseFloat(BTCUSDT['price']).toFixed(2)
@@ -49,22 +57,23 @@ const get_binance_pair_price = async (pair) => {
         // Waiting for selectors loading
         const hecApy = await page.locator('div:below(:text("APY")) >> nth=0').innerText();
 
-
-
+        console.log('   Your Staked Balance of HEC from FTMScann:', hecBalanceFromFtmScann + ' sHEC')
         console.log('   BTC Price:', '$' + btcPrice)
         console.log('   FTM Price:', '$' + ftmPrice)
 
-        console.log('   Market Cap:', '$' + marketCap)
-        console.log('   HEC Price:', '$' + hecPrice)
+        console.log('   Market Cap:', marketCap)
+        console.log('   HEC Price:', hecPrice)
         console.log('   HEC Burned:', hecBurned)
         console.log('   Circulating Supply:', circulatingSupply)
-        console.log('   HEC Treasury:', '$' + hecTreasury)
+        console.log('   HEC Treasury:', hecTreasury)
         console.log('   Current Index:', currentIndex)
 
         console.log('   Total Value Deposited:', totalValueDeposited)
         console.log('   HEC Staked:', hecStaked)
-        console.log('   HEC Runway:', hecRunway)
+        console.log('   HEC Runway:', hecRunway + ' Days')
         console.log('   Protocol Owned Liquidity:', protocolOwnedLiquidity)
+
+        console.log('   APY:', hecApy)
 
         console.log('==>Scraping from app.hector.finance finished');
         console.log('');
