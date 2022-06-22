@@ -21,7 +21,6 @@ fnamedate = yyyy + mm + dd + '_' + hh + min + ss;
 const get_binance_pair_price = async (pair) => {
     const api = `https://api.binance.com/api/v3/ticker/price?symbol=${pair}`
     const response = await axios.get(api)
-
     return response.data
 }
 
