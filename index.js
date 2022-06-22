@@ -1,6 +1,21 @@
 const { chromium } = require("playwright");
 const axios = require('axios');
 
+// Date
+const d = Math.round(+new Date() / 1000)
+const date = new Date(parseInt(d) * 1000)
+
+yyyy = date.getFullYear(),
+    mm = ('0' + (date.getMonth() + 1)).slice(-2), // Months are zero based. Add leading 0.
+    dd = ('0' + date.getDate()).slice(-2), // Add leading 0.
+    // hh = date.getHours(),
+    hh = ('0' + date.getHours()).slice(-2),
+    min = ('0' + date.getMinutes()).slice(-2), // Add leading 0.
+    ss = ('0' + date.getSeconds()).slice(-2), // Add leading 0.
+
+    formatdate = yyyy + '/' + mm + '/' + dd + ' ' + hh + ':' + min + ':' + ss;
+fnamedate = yyyy + mm + dd + '_' + hh + min + ss;
+
 // Get current token price from api.binance.com
 const get_binance_pair_price = async (pair) => {
     const api = `https://api.binance.com/api/v3/ticker/price?symbol=${pair}`
