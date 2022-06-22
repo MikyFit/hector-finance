@@ -1,0 +1,16 @@
+{
+  "name": "hector-finance",
+  "version": "1.0.0",
+  "description": "A simple tool for scraping app.hector.finance* with Playwright & Axios",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "MikyFit",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "playwright": "^1.22.2"
+  }
+}
