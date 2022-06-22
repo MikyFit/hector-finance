@@ -1,5 +1,6 @@
 const { chromium } = require("playwright");
 const axios = require('axios');
+const fs = require("fs");
 
 // Date
 const d = Math.round(+new Date() / 1000)
@@ -92,6 +93,10 @@ const get_binance_pair_price = async (pair) => {
 
         console.log('==>Scraping from app.hector.finance finished');
         console.log('');
+
+        fs.writeFile(`${fnamedate}_hectorFinance.csv`, 'Date' + ';' + 'Your Staked Balance' + ';' + 'BTC Price' + ';' + 'FTM Price' + ';' + 'HEC Price' + ';' + 'HEC Burned' + ';' + 'Market Cap' + ';' + 'Circulating Supply (total)' + ';' + 'Current Index' + ';' + 'Total Value Deposited' + ';' + 'Treasury Assets' + ';' + 'APY' + ';' + 'Protocol Owned Liquidity' + ';' + 'HEC Staked' + ';' + 'Runway Available' + '\n' + formatdate + ';' + hecBalanceFromFtmScann + ';' + btcPrice + ';' + ftmPrice + ';' + hecPrice + ';' + hecBurned + ';' + marketCap + ';' + circulatingSupply + ';' + currentIndex + ';' + totalValueDeposited + ';' + hecTreasury + ';' + hecApy + ';' + protocolOwnedLiquidity + ';' + hecStaked + ';' + hecRunway, function (err) {
+            if (err) throw err;
+        });
 
         // Closing app
         await browser.close();
