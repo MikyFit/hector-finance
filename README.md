@@ -1,6 +1,6 @@
 # Web scraping with Playwright & Axios
 
-| A simple tool for scraping app.hector.finance* with Playwright & Axios       | ![alt text](https://www.markdownguide.org/assets/images/tux.png) |
+| A simple tool for scraping app.hector.finance* with Playwright & Axios       | ![alt text](https://cdn.stamp.fyi/space/hectordao.eth?s=160&cb=141e8b325ed7c273) |
 | ----------- | ----------- |
 |       |        |
 
