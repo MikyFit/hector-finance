@@ -39,6 +39,18 @@ const get_binance_pair_price = async (pair) => {
         const hecTreasury = await page.locator('div:below(:text("Treasury")) >> nth=0').innerText();
         const currentIndex = await page.locator('div:below(:text("Current Index")) >> nth=0').innerText();
 
+        const totalValueDeposited = await page.locator('div:right-of(:text("Total Value Deposited")) >> nth=0').innerText();
+        const hecStaked = await page.locator('div:right-of(:text("HEC Staked")) >> nth=0').innerText();
+        const hecRunway = await page.locator('div:right-of(:text("Runway")) >> nth=0').innerText();
+        const protocolOwnedLiquidity = await page.locator('div:right-of(:text("Protocol Owned Liquidity")) >> nth=0').innerText();
+
+        // Grabbing APY from app.hector.finance/stake
+        await page.goto('https://app.hector.finance/stake', { waitUntil: 'networkidle' });
+        // Waiting for selectors loading
+        const hecApy = await page.locator('div:below(:text("APY")) >> nth=0').innerText();
+
+
+
         console.log('   BTC Price:', '$' + btcPrice)
         console.log('   FTM Price:', '$' + ftmPrice)
 
@@ -48,6 +60,11 @@ const get_binance_pair_price = async (pair) => {
         console.log('   Circulating Supply:', circulatingSupply)
         console.log('   HEC Treasury:', '$' + hecTreasury)
         console.log('   Current Index:', currentIndex)
+
+        console.log('   Total Value Deposited:', totalValueDeposited)
+        console.log('   HEC Staked:', hecStaked)
+        console.log('   HEC Runway:', hecRunway)
+        console.log('   Protocol Owned Liquidity:', protocolOwnedLiquidity)
 
         console.log('==>Scraping from app.hector.finance finished');
         console.log('');
